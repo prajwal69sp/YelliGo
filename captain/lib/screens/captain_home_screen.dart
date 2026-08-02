@@ -157,6 +157,7 @@ class _CaptainVehicleMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
       decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
       child: const Icon(Icons.two_wheeler, color: Colors.white, size: 24),
     );
