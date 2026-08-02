@@ -106,43 +106,26 @@ class _AppLogoBadge extends StatelessWidget {
   const _AppLogoBadge();
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6)],
-      ),
-      child: Image.asset('assets/logo.png', width: 32, height: 32),
-    );
-  }
-}
-
-class _PulsingLocationDot extends StatelessWidget {
-  const _PulsingLocationDot();
-
-  @override
-  Widget build(BuildContext context) {
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.blue.withOpacity(0.25),
-      ),
-      child: Center(
-        child: Container(
-          width: 16,
-          height: 16,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.blue,
-            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4)],
-          ),
+Widget build(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      color: Colors.blue.withOpacity(0.25),
+    ),
+    child: Center(
+      child: Container(
+        width: 16,
+        height: 16,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.blue,
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4)],
         ),
       ),
-    );
-  }
+    ),
+  );
 }
-
+  
 class _StatusBanner extends StatelessWidget {
   final RideState rideState;
 
