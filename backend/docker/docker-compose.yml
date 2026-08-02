@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: yelligo_pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: yelligo
+      POSTGRES_USER: yelligo_user
+      POSTGRES_PASSWORD: changeme
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U yelligo_user -d yelligo"]
+      interval: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: yelligo_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+
+  osrm-prep:
+    image: osrm/osrm-backend
+    container_name: yelligo_osrm_prep
+    volumes:
+      - ./osrm-data:/data
+    entrypoint: >
+      /bin/sh -c "
+      osrm-extract -p /opt/car.lua /data/region.osm.pbf &&
+      osrm-partition /data/region.osrm &&
+      osrm-customize /data/region.osrm"
+    profiles: ["prep"]
+
+  osrm:
+    image: osrm/osrm-backend
+    container_name: yelligo_osrm
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./osrm-data:/data
+    command: osrm-routed --algorithm mld /data/region.osrm
+    depends_on:
+      - osrm-prep
+
+volumes:
+  pgdata:
+  redisdata:

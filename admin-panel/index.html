@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YelliGo Admin Panel</title>
+<link rel="stylesheet" href="assets/style.css" />
+<link href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">Yelli<span>Go</span> Admin</div>
+      <div class="nav-item active">📊 Dashboard</div>
+      <div class="nav-item">🗺️ Live Map</div>
+      <div class="nav-item">🚕 Rides</div>
+      <div class="nav-item">🛡️ Driver Verification</div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1>Dashboard</h1>
+        <div class="conn-badge"><span class="status-dot" id="connDot"></span><span id="connText">Connecting…</span></div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="card">
+          <div class="stat-label">Rides Today</div>
+          <div class="stat-value" id="statRides">–</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Revenue Today</div>
+          <div class="stat-value" id="statRevenue">–</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Drivers Online</div>
+          <div class="stat-value" id="statOnline">–</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Pending Verification</div>
+          <div class="stat-value" id="statPending">–</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Live Driver Map</h2>
+          <div id="map"></div>
+          <div class="legend">
+            <span><span class="dot online"></span>Online</span>
+            <span><span class="dot ontrip"></span>On Trip</span>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Ride Status (Today)</h2>
+          <canvas id="statusChart" height="220"></canvas>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Recent Rides</h2>
+          <table>
+            <thead>
+              <tr><th>Passenger</th><th>Driver</th><th>Status</th><th>Fare</th><th>Time</th></tr>
+            </thead>
+            <tbody id="ridesTableBody">
+              <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h2>Pending Driver Verification</h2>
+          <table>
+            <thead>
+              <tr><th>Name</th><th>License</th><th></th></tr>
+            </thead>
+            <tbody id="pendingTableBody">
+              <tr><td colspan="3" class="empty-state">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
