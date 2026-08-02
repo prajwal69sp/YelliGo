@@ -27,6 +27,8 @@ jobs:
           if [ ! -d "android" ]; then
             flutter create --platforms=android --org com.yelligo .
           fi
+          sed -i 's#<manifest xmlns:android="http://schemas.android.com/apk/res/android">#<manifest xmlns:android="http://schemas.android.com/apk/res/android">\n    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>\n    <uses-permission android:name="android.permission.INTERNET"/>#' android/app/src/main/AndroidManifest.xml
+          sed -i 's#<application#<application\n        android:usesCleartextTraffic="true"#' android/app/src/main/AndroidManifest.xml
 
       - name: Build release APK
         working-directory: mobile
@@ -59,6 +61,8 @@ jobs:
           if [ ! -d "android" ]; then
             flutter create --platforms=android --org com.yelligo .
           fi
+          sed -i 's#<manifest xmlns:android="http://schemas.android.com/apk/res/android">#<manifest xmlns:android="http://schemas.android.com/apk/res/android">\n    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>\n    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>\n    <uses-permission android:name="android.permission.INTERNET"/>#' android/app/src/main/AndroidManifest.xml
+          sed -i 's#<application#<application\n        android:usesCleartextTraffic="true"#' android/app/src/main/AndroidManifest.xml
 
       - name: Build release APK
         working-directory: captain
