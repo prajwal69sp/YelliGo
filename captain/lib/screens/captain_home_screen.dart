@@ -60,7 +60,11 @@ class CaptainHomeScreen extends ConsumerWidget {
                 ],
               ),
 
-              // Top bar: online toggle + earnings summary
+              const Positioned(
+                top: 16,
+                left: 16,
+                child: _AppLogoBadge(),
+              ),
               if (captainState is Offline || captainState is OnlineSearching)
                 Positioned(
                   top: MediaQuery.of(context).padding.top + 12,
@@ -131,12 +135,28 @@ class CaptainHomeScreen extends ConsumerWidget {
       };
 }
 
+class _AppLogoBadge extends StatelessWidget {
+  const _AppLogoBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6)],
+      ),
+      child: Image.asset('assets/logo.png', width: 32, height: 32),
+    );
+  }
+}
+
 class _CaptainVehicleMarker extends StatelessWidget {
   const _CaptainVehicleMarker();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
       decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
       child: const Icon(Icons.two_wheeler, color: Colors.white, size: 24),
     );

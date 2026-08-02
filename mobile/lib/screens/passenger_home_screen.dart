@@ -64,9 +64,14 @@ class PassengerHomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
+              const Positioned(
+                top: 16,
+                left: 16,
+                child: _AppLogoBadge(),
+              ),
               if (rideState is! SelectingDestination)
                 Positioned(
-                  top: MediaQuery.of(context).padding.top + 12,
+                  top: MediaQuery.of(context).padding.top + 72,
                   left: 16,
                   right: 16,
                   child: _StatusBanner(rideState: rideState),
@@ -97,12 +102,28 @@ class PassengerHomeScreen extends ConsumerWidget {
       };
 }
 
+class _AppLogoBadge extends StatelessWidget {
+  const _AppLogoBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6)],
+      ),
+      child: Image.asset('assets/logo.png', width: 32, height: 32),
+    );
+  }
+}
+
 class _PulsingLocationDot extends StatelessWidget {
   const _PulsingLocationDot();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.blue.withOpacity(0.25),
